@@ -1,6 +1,6 @@
-var Chat = React.createClass({
+$ ->
+  CommentBox = React.createClass
+    render: ->
+      `<div className="CommentBox">Hello, world! I am a CommentBox.</div>`
 
-  render: function() {
-    return <div />;
-  }
-});
+  React.render `<CommentBox />`, document.getElementById('content')
