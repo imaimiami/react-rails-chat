@@ -18,7 +18,7 @@ $ ->
     render: ->
       `<div className="commentBox">
          <h1>Comment</h1>
-         <CommentList data={ this.props.data } />
+         <CommentList data={ this.state.data } />
          <CommentForm />
        </div>`
 
@@ -41,10 +41,4 @@ $ ->
          <span>{ this.props.children }</span>
        </div>`
 
-  data = [
-    { author: 'Pete Hunt', text: 'This is one comment.' }
-    { author: 'Jorden Walke', text: 'This is *another* comment.' }
-  ]
-
-  React.render `<CommentBox data={ data } pollInterval={ 2000 } />`, document.getElementById('content')
-  
+  React.render `<CommentBox url="/api/comments" pollInterval={ 2000 } />`, document.getElementById('content')
