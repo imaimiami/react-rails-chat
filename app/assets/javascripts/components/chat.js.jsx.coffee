@@ -1,5 +1,20 @@
 $ ->
   CommentBox = React.createClass
+  	loadCommentsFromServer: ->
+      $.ajax
+        url: @props.url
+        dataType: 'json'
+      .done (data) =>
+        @setState(data: data)
+      .fail (xhr, status, err) =>
+        console.error @props.url, status, err.toString()
+
+    getInitialState: -> data: []
+
+    componentDidMount: ->
+      @loadCommentsFromServer()
+      setInterval @loadCommentsFromServer, @props.pollInterval
+
     render: ->
       `<div className="commentBox">
          <h1>Comment</h1>
@@ -31,4 +46,5 @@ $ ->
     { author: 'Jorden Walke', text: 'This is *another* comment.' }
   ]
 
-  React.render `<CommentBox data={ data } />`, document.getElementById('content')
+  React.render `<CommentBox data={ data } pollInterval={ 2000 } />`, document.getElementById('content')
+  
