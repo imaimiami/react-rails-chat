@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-  get 'comments/index'
+    resources :comments, only: :index
   end
 
   get 'dashboard/index'
